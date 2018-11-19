@@ -9,13 +9,12 @@ class ReadingListController {
 
   @RequestMapping(method=RequestMethod.GET)
   def readersBooks(Model model) {
-    List<Book> readingList = 
-        readingListRepository.findByReader(reader)
+    List<User> readingList =
+        readingListRepository.findAllUsers()
 
     if (readingList != null) {
-      model.addAttribute("books", readingList)
+      model.addAttribute("users", readingList)
     }
-
     "readingList"
   }
 

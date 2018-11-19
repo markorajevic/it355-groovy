@@ -6,3 +6,9 @@ create table Book (
 	author varchar(50) not null,
 	description varchar(2000) not null
 );
+
+create table User (
+	id identity,
+	username varchar(2048) not null,
+	password varchar(2048) not null
+);

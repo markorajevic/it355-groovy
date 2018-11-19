@@ -19,15 +19,36 @@ class JdbcReadingListRepository implements ReadingListRepository {
         reader)
   }
 
+  List<User> findAllUsers() {
+    jdbc.query(
+        "select id, username, password " +
+        "from User",
+        { rs, row ->
+              new User(id: rs.getLong(1),
+                  username: rs.getString(2),
+                  password: rs.getString(3))
+        } as RowMapper)
+  }
+
+
+
   void save(Book book) {
     jdbc.update("insert into Book " +
                 "(reader, isbn, title, author, description) " +
                 "values (?, ?, ?, ?, ?)",
-        book.reader, 
-        book.isbn, 
-        book.title, 
-        book.author, 
+        book.reader,
+        book.isbn,
+        book.title,
+        book.author,
         book.description)
+  }
+
+  void saveUser(User user) {
+    jdbc.update("insert into User " +
+                "(username, password,) " +
+                "values (?, ?)",
+        user.username,
+        user.password)
   }
 
 }
